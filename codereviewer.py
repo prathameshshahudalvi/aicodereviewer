@@ -8,8 +8,8 @@ import smtplib
 from email.message import EmailMessage
 
 model_name = "llama-3.3-70b-versatile"
-msg_from = "prathameshdalvi2017@gmail.com"
-msg_to = "prathameshshahudalvi@gmail.com"
+msg_from = "Sender@gmail.com"
+msg_to = "Receiver@gmail.com"
 
 class HTMLResponse(BaseModel):
     html: str = Field(description="Complete valid HTML document. Must start with <html> and end with </html>. No extra text.")
