@@ -8,16 +8,14 @@ from pydantic import BaseModel, Field
 model_name = "llama-3.3-70b-versatile"
 
 class HTMLResponse(BaseModel):
-    html: str = Field(description="Valid HTML content")
+    html: str = Field(description="Complete valid HTML document. Must start with <html> and end with </html>. No extra text.")
 
 def main():
     load_dotenv()
     diff = subprocess.check_output(["git","show"], text=True)
     GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-    llm = ChatGroq(model_name = model_name)
-    response = llm.with_structured_output(HTMLResponse).invoke(f"""
-    Summarize the following diff according to these rules:{RuleBook.rule}
-    Diff:{diff}""")
+    llm = ChatGroq(model_name = model_name, api_key=GROQ_API_KEY)
+    response = llm.with_structured_output(HTMLResponse,method="json_schema").invoke(f"""Summarize the following diff according to these rules:{RuleBook.rule} Diff:{diff}""")
     print(response)
 
 if __name__ == "__main__":
