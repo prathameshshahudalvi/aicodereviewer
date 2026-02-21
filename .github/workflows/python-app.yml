@@ -20,4 +20,5 @@ jobs:
             - name: Run Review Scripts
               env:
                 GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+                MAIL_APP_PASSWORD: ${{secrets.MAIL_APP_PASSWORD}}
               run: python codereviewer.py
