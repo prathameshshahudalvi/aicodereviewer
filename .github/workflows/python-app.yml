@@ -18,4 +18,6 @@ jobs:
             - name: Install Dependencies
               run: pip install -r requirements.txt
             - name: Run Review Scripts
+              env:
+                GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
               run: python codereviewer.py
